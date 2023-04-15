@@ -27,7 +27,6 @@ public class SwitchFeatureApplication {
     @Autowired
     private InventoryService service;
 
-
     @GetMapping("/orders")
     public List<Product> showAvailableProducts() {
         if (manager.isActive(DISCOUNT_APPLIED)) {
@@ -46,10 +45,14 @@ public class SwitchFeatureApplication {
         return orderListAfterDiscount;
     }
 
-
     public static void main(String[] args) {
         SpringApplication.run(SwitchFeatureApplication.class, args);
     }
 
+    // get method to check the status of the feature
+    @GetMapping("/status")
+    public String status() {
+        return manager.isActive(DISCOUNT_APPLIED) ? "ON" : "OFF";
+    }
 
 }
